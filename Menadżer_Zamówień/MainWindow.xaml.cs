@@ -20,6 +20,7 @@ namespace Menadżer_Zamówień
     /// </summary>
     public partial class MainWindow : Window
     {
+        // komentarz
         public MainWindow()
         {
             InitializeComponent();
