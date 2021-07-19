@@ -104,6 +104,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\TabDodajOsobe.cs" />
+    <Compile Include="ViewModel\TabDodajZamowienie.cs" />
+    <Compile Include="ViewModel\TabPodglad.cs" />
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,8 +116,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DAL\DBConnection.cs" />
+    <Compile Include="DAL\Encje\Osoba.cs" />
+    <Compile Include="DAL\Encje\Sklep.cs" />
+    <Compile Include="DAL\Encje\Przewoznik.cs" />
+    <Compile Include="DAL\Encje\Zamowienie.cs" />
+    <Compile Include="DAL\Repozytoria\RepozytoriumOsoba.cs" />
+    <Compile Include="DAL\Repozytoria\RepozytoriumPrzewoznik.cs" />
+    <Compile Include="DAL\Repozytoria\RepozytoriumSklep.cs" />
+    <Compile Include="DAL\Repozytoria\RepozytoriumZamowienie.cs" />
+    <Compile Include="Model\Model.cs" />
     <Compile Include="ViewModel\BaseClass\RelayCommand.cs" />
     <Compile Include="ViewModel\BaseClass\ViewModelBase.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\TabPodgladSklepPrzewoznik.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -147,10 +161,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAL\Encje\" />
-    <Folder Include="DAL\Repozytoria\" />
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
