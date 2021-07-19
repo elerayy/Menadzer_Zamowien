@@ -4,9 +4,217 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Menadżer_Zamówień"
+        xmlns:vm="clr-namespace:Menadżer_Zamówień.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    
+    <Window.Resources>
+        <vm:MainViewModel x:Key="mainVM"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource mainVM}">
+        <TabControl>
+            <!-- karta z podglądem użytkowików i ich zamówień-->
+            <TabItem x:Name="podglad" Header="Podgląd">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- lista osób -->
+                    <ListView x:Name="osoby" Grid.Column="0">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <!-- kolumna username -->
+                                    <GridViewColumn Width="100" x:Name="kol_Username">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!-- TextBlock Text="{Binding Username}"-->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Username" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                    
+                                    <!-- kolumna imię -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Imie}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Imię" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <!-- kolumna nazwisko -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Nazwisko}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Nazwisko" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <!-- lista zamówień -->
+                    <ListView x:Name="zamowienia" Grid.Column="2" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <!-- kolumna username -->
+                                    <GridViewColumn Width="100" x:Name="kol_Username2">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!-- TextBlock Text="{Binding Username}"-->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Username" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <!-- kolumna co -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Co}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Towar/Usługa" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <!-- kolumna koszt -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Koszt}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Koszt" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <!-- kolumna data_zam -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Data_Zam}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Data zamówienia" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <!-- kolumna data_est -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Data_Est}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Data estymowanego dostarczenia" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <!-- kolumna status -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Status}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Status" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <!-- kolumna zwrot -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Zwrot}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Zwrot" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <!-- kolumna id_sklepu -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Id_Sklepu}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Sklep" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                    <!-- kolumna id_p -->
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--TextBlock Text="{Binding Id_P}" -->
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Przewoźnik" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </Grid>
+            </TabItem>
+            <!-- karta z możliwością dodania i edycji użytkownika -->
+            <TabItem x:Name="dod_osobe" Header="Dodaj osobę">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <!-- karta z możliwością dodania i edycji zamówienia -->
+            <TabItem x:Name="dod_zam" Header="Dodaj zamówienie">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <!-- karta z listą dostępnych sklepów i przewoźników -->
+            <TabItem x:Name="lista_skl_przew" Header="Lista sklepów i przewoźników">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
