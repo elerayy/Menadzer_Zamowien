@@ -19,8 +19,10 @@ namespace Menadżer_Zamówień.DAL.Encje
         public string Status { get; set; }
         public string Zwrot { get; set; }
         public string Username { get; set; }
-        public sbyte IdS { get; set; }
-        public sbyte IdP { get; set; }
+        //public sbyte IdS { get; set; }
+        //public sbyte IdP { get; set; }
+        public string IdS { get; set; }
+        public string IdP { get; set; }
 
         #endregion
 
@@ -32,18 +34,20 @@ namespace Menadżer_Zamówień.DAL.Encje
             Id = sbyte.Parse(reader["id"].ToString());
             Co = reader["co"].ToString();
             Koszt = float.Parse(reader["koszt"].ToString());
-            DataZam = reader["data_zam"].ToString();
-            DataEst = reader["data_est"].ToString();
+            DataZam = (reader["data_zam"].ToString()).Substring(0, 10);
+            DataEst = (reader["data_est"].ToString()).Substring(0, 10);
             Status = reader["status"].ToString();
             Zwrot = reader["zwrot"].ToString();
             Username = reader["username"].ToString();
-            IdS = sbyte.Parse(reader["id_sklepu"].ToString());
-            IdP = sbyte.Parse(reader["id_p"].ToString());
+            //IdS = sbyte.Parse(reader["id_sklepu"].ToString());
+            //IdP = sbyte.Parse(reader["id_p"].ToString());
+            IdS = reader["nazwa"].ToString();
+            IdP = reader["firma"].ToString();
         }
 
         // Konstruktor tworzący nowy obiekt
         public Zamowienie(string co, float koszt, string data_zam, string data_est,
-            string status, string zwrot, string username, sbyte idS, sbyte idP)
+            string status, string zwrot, string username, string idS, string idP)
         {
             Id = null;
             Co = co.Trim();
