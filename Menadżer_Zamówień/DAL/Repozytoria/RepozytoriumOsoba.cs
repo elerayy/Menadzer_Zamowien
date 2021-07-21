@@ -43,6 +43,7 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             {
                 MySqlCommand command = new MySqlCommand($"{DODAJ_OSOBE} {osoba.ToInsert()}", connection);
                 connection.Open();
+                var id = command.ExecuteNonQuery();
                 stan = true;
                 connection.Close();
             }
