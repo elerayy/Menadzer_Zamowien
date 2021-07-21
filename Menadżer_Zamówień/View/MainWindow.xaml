@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Menadżer_Zamówień"
         xmlns:vm="clr-namespace:Menadżer_Zamówień.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
@@ -23,7 +24,14 @@
                         <ColumnDefinition Width="10*"/>
                     </Grid.ColumnDefinitions>
                     <!-- lista osób -->
-                    <ListView x:Name="osoby" Grid.Column="0" ItemsSource="{Binding TabPodgladVM.Osoby}">
+                    <ListView x:Name="osoby" Grid.Column="0" ItemsSource="{Binding TabPodgladVM.Osoby}"
+                              SelectedItem="{Binding TabPodgladVM.BiezacaOsoba}"
+                              SelectedIndex="{Binding TabPodgladVM.IndexZaznaczonejOsoby, Mode=TwoWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding TabPodgladVM.ZaladujZamowienia}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -197,19 +205,19 @@
                     <Grid Grid.Column="0">
                     <StackPanel Grid.Column="0" Margin="5,5,5.4,5" Grid.ColumnSpan="3">
                         <TextBlock Text="Username:"/>
-                        <TextBox x:Name="username"/>
+                        <TextBox x:Name="username" Text="{Binding TabDodaOsobeVM.Username}"/>
                         <!-- BINDING -->
                         <TextBlock Text="Imię:"/>
-                        <TextBox x:Name="imie"/>
+                        <TextBox x:Name="imie" Text="{Binding TabDodaOsobeVM.Imie}"/>
                         <!-- BINDING -->
                         <TextBlock Text="Nazwisko:"/>
-                        <TextBox x:Name="nazwisko"/>
+                        <TextBox x:Name="nazwisko" Text="{Binding TabDodaOsobeVM.Nazwisko}"/>
                         <!-- BINDING -->
                         <TextBlock Text="Adres"/>
-                        <TextBox x:Name="adres"/>
+                        <TextBox x:Name="adres" Text="{Binding TabDodaOsobeVM.Adres}"/>
                         <!-- BINDING -->
                         <TextBlock Text="Numer telefonu:"/>
-                        <TextBox x:Name="nrTel" />
+                        <TextBox x:Name="nrTel" Text="{Binding TabDodaOsobeVM.NrTel}"/>
                         <!-- BINDING -->
                         <TextBlock />
                         <Grid>
@@ -219,11 +227,11 @@
                             </Grid.ColumnDefinitions>
                             <Button x:Name="button_Dodaj" Grid.Column="0" Content="Dodaj osobę do bazy"
                                     Margin="5"
-                                    Command="{Binding TabDodajOsobyVM.Dodaj}"
-                                    IsEnabled="{Binding TabDodajOsobyVM.DodawanieDostepne, Mode=OneWay}"
+                                    Command="{Binding TabDodaOsobeVM.Dodaj}"
+                                    IsEnabled="{Binding TabDodaOsobeVM.DodawanieDostepne, Mode=OneWay}"
                              />
                             <!-- BINDING -->
-                            <Button x:Name="button_Edytuj" Grid.Column="1" Content="Edytuj" 
+                            <Button x:Name="button_Edytuj" Grid.Column="1" Content="Edytuj osobę z bazy" 
                                     Margin="5"
                                     Command="{Binding TabDodajOsobyVM.Edytuj}"
                                     IsEnabled="{Binding TabDodajOsobyVM.EdycjaDostepna, Mode=OneWay}"

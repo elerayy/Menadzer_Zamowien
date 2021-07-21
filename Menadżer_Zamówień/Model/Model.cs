@@ -41,10 +41,26 @@ namespace Menadżer_Zamówień.Model
         {
             if (!CzyJestOsobaWRepo(osoba))
             {
-                Osoby.Add(osoba);
-                return true;
+                if(RepozytoriumOsoba.DodajOsobe(osoba))
+                {
+                    Osoby.Add(osoba);
+                    return true;
+                }
             }
             return false;
+        }
+
+        public ObservableCollection<Zamowienie> PobierzZamowieniaOsoby(Osoba osoba)
+        {
+            var zamowienia = new ObservableCollection<Zamowienie>();
+            foreach (var zam in Zamowienia)
+            {
+                if(osoba.Username == zam.Username)
+                {
+                    zamowienia.Add(zam);
+                }
+            }
+            return zamowienia;
         }
     }
 }

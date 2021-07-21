@@ -10,6 +10,7 @@ namespace Menadżer_Zamówień.ViewModel
     using Menadżer_Zamówień.Model;
     using Menadżer_Zamówień.DAL.Encje;
     using System.Collections.ObjectModel;
+    using System.Windows.Input;
 
     class TabPodglad : ViewModelBase
     {
@@ -18,7 +19,7 @@ namespace Menadżer_Zamówień.ViewModel
         private Model model = null;
         private ObservableCollection<Osoba> osoby = null;
         private ObservableCollection<Zamowienie> zamowienia = null;
-
+        private int indexZaznaczonejOsoby = -1;
         #endregion
 
         #region Konstruktory
@@ -49,6 +50,39 @@ namespace Menadżer_Zamówień.ViewModel
                 onPropertyChanged(nameof(Zamowienia));
             }
         }
+
+        public Osoba BiezacaOsoba { get; set; }
+
+        public int IndexZaznaczonejOsoby
+        {
+            get => indexZaznaczonejOsoby;
+            set
+            {
+                indexZaznaczonejOsoby = value;
+                onPropertyChanged(nameof(IndexZaznaczonejOsoby));
+            }
+        }
+        #endregion
+
+        #region Polecenia
+        private ICommand zaladujZamowienia = null;
+
+        public ICommand ZaladujZamowienia
+        {
+            get
+            {
+                if (zaladujZamowienia == null)
+                    zaladujZamowienia = new RelayCommand(
+                        arg =>
+                        {
+                            if (BiezacaOsoba != null)
+                                Zamowienia = model.PobierzZamowieniaOsoby(BiezacaOsoba);
+                        },
+                        arg => true);
+                return zaladujZamowienia;
+            }
+        }
+
         #endregion
     }
 }

@@ -52,7 +52,7 @@ namespace Menadżer_Zamówień.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Zaq12wsx")]
         public string passwd {
             get {
                 return ((string)(this["passwd"]));

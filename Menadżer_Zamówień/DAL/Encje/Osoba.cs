@@ -63,7 +63,7 @@ namespace Menadżer_Zamówień.DAL.Encje
         // Metoda do insert to
         public string ToInsert()
         {
-            return $"('{Username}', '{Imie}', {Nazwisko},'{Adres}', '{NrTel}')";
+            return $"('{Username}', '{Imie}', '{Nazwisko}', '{Adres}', '{NrTel}')";
         }
 
         // Sprawdzenie czy taka osoba już istnieje
