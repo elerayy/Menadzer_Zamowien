@@ -51,7 +51,6 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             return stan;
         }
 
-
         public static bool EdytujZamowienie(Zamowienie zamowienie, sbyte id)
         {
             bool stan = false;
