@@ -8,6 +8,9 @@ using MySql.Data.MySqlClient;
 namespace Menadżer_Zamówień.DAL.Repozytoria
 {
     using Encje;
+    using System.Globalization;
+    using System.Threading;
+
     class RepozytoriumZamowienie
     {
         #region Zapytania
@@ -16,7 +19,7 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
         private const string ZAMOWIENIA_LEPIEJ = "select id, co, koszt, data_zam, data_est, status, zwrot, username, " +
             "nazwa, firma from zamowienie z, przewoznik p, sklep s WHERE z.id_sklepu = s.id_sklepu and z.id_p = p.id_p";
         private const string DODAJ_ZAMOWIENIE = "insert into `zamowienie`(`co`, `koszt`, `data_zam`, `data_est`," +
-            " `status`, `zwrot`, `id_sklepu`, `id_p`) values";
+            " `status`, `zwrot`, `username`, `id_sklepu`, `id_p`) values";
         #endregion
 
         #region metody CRUD
@@ -38,9 +41,13 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
 
         public static bool DodajZamowienie(Zamowienie zamowienie)
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+
             bool stan = false;
             using (var connection = DBConnection.Instance.Connection)
             {
+                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Console.WriteLine($"{DODAJ_ZAMOWIENIE} {zamowienie.ToInsert()}");
                 MySqlCommand command = new MySqlCommand($"{DODAJ_ZAMOWIENIE} {zamowienie.ToInsert()}", connection);
                 connection.Open();
                 var id = command.ExecuteNonQuery();

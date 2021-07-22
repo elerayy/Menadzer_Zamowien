@@ -329,31 +329,36 @@
                     <Grid Grid.Column="0">
                         <StackPanel Grid.Column="0" Margin="5,5,5.4,5" Grid.ColumnSpan="3">
                             <TextBlock Text="Co:"/>
-                            <TextBox x:Name="co" MaxLength="20"/>
+                            <TextBox x:Name="co" MaxLength="20" Text="{Binding TabDodajZamowienieVM.Co}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Koszt:"/>
-                            <xctk:DoubleUpDown Value="0" Increment="0.01" FormatString="C2" Minimum="0" Maximum="1000000"/>
+                            <xctk:DoubleUpDown DefaultValue="0" Value="{Binding TabDodajZamowienieVM.Koszt}" Increment="0.01" FormatString="F2" Minimum="0" Maximum="1000000" CultureInfo="en-US"/>
                             <!-- BINDING -->
                             <TextBlock Text="Data zamówienia"/>
-                            <DatePicker x:Name="data_zam" SelectedDate="{Binding TabDodajZamowienieVM.DataDzis}"/>
+                            <DatePicker x:Name="data_zam" SelectedDate="{Binding TabDodajZamowienieVM.DataZam}" />
                             <!-- BINDING -->
                             <TextBlock Text="Data estymowanego zamówienia:"/>
-                            <DatePicker x:Name="data_est" SelectedDate="{Binding TabDodajZamowienieVM.DataDzis}"/>
+                            <DatePicker x:Name="data_est" SelectedDate="{Binding TabDodajZamowienieVM.DataEst}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Status:"/>
-                            <ComboBox x:Name="status" ItemsSource="{Binding TabDodajZamowienieVM.Statusy}"/>
+                            <ComboBox x:Name="status" ItemsSource="{Binding TabDodajZamowienieVM.Statusy}"
+                                      SelectedValue="{Binding TabDodajZamowienieVM.Status}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Zwrot:"/>
-                            <ComboBox x:Name="zwrot" ItemsSource="{Binding TabDodajZamowienieVM.Zwroty}"/>
+                            <ComboBox x:Name="zwrot" ItemsSource="{Binding TabDodajZamowienieVM.Zwroty}"
+                                      SelectedValue="{Binding TabDodajZamowienieVM.Zwrot}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Username:"/>
-                            <ComboBox x:Name="username_Z" ItemsSource="{Binding TabDodajZamowienieVM.Usernames}"/>
+                            <ComboBox x:Name="username_Z" ItemsSource="{Binding TabDodajZamowienieVM.Usernames}"
+                                SelectedValue="{Binding TabDodajZamowienieVM.Username}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Sklep:"/>
-                            <ComboBox x:Name="id_s" ItemsSource="{Binding TabDodajZamowienieVM.Sklepy}"/>
+                            <ComboBox x:Name="id_s" ItemsSource="{Binding TabDodajZamowienieVM.Sklepy}"
+                                      SelectedValue="{Binding TabDodajZamowienieVM.NazwaSklepu}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Przewoźnik:"/>
-                            <ComboBox x:Name="id_p" ItemsSource="{Binding TabDodajZamowienieVM.Przewoznicy}"/>
+                            <ComboBox x:Name="id_p" ItemsSource="{Binding TabDodajZamowienieVM.Przewoznicy}"
+                                      SelectedValue="{Binding TabDodajZamowienieVM.Przewoznik}"/>
                             <!-- BINDING -->
                             <TextBlock />
                             <Grid>
@@ -363,8 +368,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Button x:Name="button_Dodaj_Zam" Grid.Column="0" Content="Dodaj zamówienie"
                                     Margin="5"
-                                    Command="{Binding TabDodajOsobyVM.Dodaj}"
-                                    IsEnabled="{Binding TabDodajOsobyVM.DodawanieDostepne, Mode=OneWay}"
+                                    Command="{Binding TabDodajZamowienieVM.Dodaj}"
+                                    IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne, Mode=OneWay}"
                              />
                                 <!-- BINDING -->
                                 <Button x:Name="button_Edytuj_Zam" Grid.Column="1" Content="Edytuj" 

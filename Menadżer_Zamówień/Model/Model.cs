@@ -63,6 +63,16 @@ namespace Menadżer_Zamówień.Model
             return false;
         }
 
+        public bool DodajZamDoBazy(Zamowienie zamowienie)
+        {
+            if (RepozytoriumZamowienie.DodajZamowienie(zamowienie))
+            {
+                Zamowienia.Add(zamowienie);
+                return true;
+            }
+            return false;
+        }
+
         public ObservableCollection<Zamowienie> PobierzZamowieniaOsoby(Osoba osoba)
         {
             var zamowienia = new ObservableCollection<Zamowienie>();
@@ -90,6 +100,28 @@ namespace Menadżer_Zamówień.Model
                 return true;
             }
             return false;
+        }
+
+        public int ZnajdzIdPoSklepie(string nazwa)
+        {
+            foreach(var s in Sklepy)
+            {
+                if (s.Nazwa == nazwa)
+                    return s.IdS;
+            }
+            return 0;
+        }
+        public int ZnajdzIdPoPrzew(string nazwa)
+        {
+            foreach(var p in Przewoznicy)
+            {
+                string[] splitNazwa = nazwa.Split('-');
+                if (p.Firma == splitNazwa[1].Trim() && p.Rodzaj == splitNazwa[0].Trim())
+                {
+                    return p.IdP;
+                }
+            }
+            return 0; 
         }
     }
 }

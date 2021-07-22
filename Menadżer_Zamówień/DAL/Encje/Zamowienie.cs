@@ -89,7 +89,7 @@ namespace Menadżer_Zamówień.DAL.Encje
         // Metoda do insert to
         public string ToInsert()
         {
-            return $"('{Id}', '{Co}', {Koszt},'{DataZam}', '{DataEst}', '{Status}', '{Zwrot}', " +
+            return $"('{Co}', {Koszt},'{DataZam}', '{DataEst}', '{Status}', '{Zwrot}', " +
                 $"'{Username}', '{IdS}', '{IdP}')";
         }
 

@@ -23,6 +23,10 @@ namespace Menadżer_Zamówień.ViewModel
         private ObservableCollection<string> przewoznicy = null;
         private List<string> zwroty = new List<string>{ "tak", "nie" };
         private List<string> statusy = new List<string> { "w trakcie", "odebrane" };
+        private bool dodawanieDostepne = true;
+        private string co, status, zwrot, username, nazwaSklepu, przewoznik;
+        private DateTime dataEst, dataZam;
+        private float koszt;
         #endregion
 
         #region Konstruktory
@@ -44,6 +48,93 @@ namespace Menadżer_Zamówień.ViewModel
             {
                 zamowienia = value;
                 onPropertyChanged(nameof(Zamowienia));
+            }
+        }
+
+        public string Co
+        {
+            get { return co; }
+            set
+            {
+                co = value;
+                onPropertyChanged(nameof(Co));
+            }
+        }
+        public float Koszt
+        {
+            get { return koszt; }
+            set
+            {
+                koszt = value;
+                onPropertyChanged(nameof(Koszt));
+            }
+        }
+        public DateTime DataEst
+        {
+            get { return dataEst; }
+            set
+            {
+                dataEst = value;
+                onPropertyChanged(nameof(DataEst));
+            }
+        }
+
+        public DateTime DataZam
+        {
+            get { return dataZam; }
+            set
+            {
+                dataZam = value;
+                onPropertyChanged(nameof(DataZam));
+            }
+        }
+
+        public string Status
+        {
+            get { return status; }
+            set
+            {
+                status = value;
+                onPropertyChanged(nameof(Status));
+            }
+        }
+
+        public string Zwrot
+        {
+            get { return zwrot; }
+            set
+            {
+                zwrot = value;
+                onPropertyChanged(nameof(Zwrot));
+            }
+        }
+        public string Username
+        {
+            get { return username; }
+            set
+            {
+                username = value;
+                onPropertyChanged(nameof(Username));
+            }
+        }
+
+        public string NazwaSklepu
+        {
+            get { return nazwaSklepu; }
+            set
+            {
+                nazwaSklepu = value;
+                onPropertyChanged(nameof(NazwaSklepu));
+            }
+        }
+
+        public string Przewoznik
+        {
+            get { return przewoznik; }
+            set
+            {
+                przewoznik = value;
+                onPropertyChanged(nameof(Przewoznik));
             }
         }
 
@@ -103,9 +194,53 @@ namespace Menadżer_Zamówień.ViewModel
                 dataDzis = value;
             }
         }
+
+        public bool DodawanieDostepne
+        {
+            get { return dodawanieDostepne; }
+            set
+            {
+                dodawanieDostepne = value;
+                onPropertyChanged(nameof(DodawanieDostepne));
+            }
+        }
         #endregion
 
         #region Polecenia
+        public void CzyscFormularz()
+        {
+            Co = "";
+            Koszt = 0;
+            DodawanieDostepne = true;
+        }
+
+        private ICommand dodaj = null;
+
+        public ICommand Dodaj
+        {
+            get
+            {
+                if (dodaj == null)
+                    dodaj = new RelayCommand(
+                        arg =>
+                        {
+                            var idSklep = model.ZnajdzIdPoSklepie(NazwaSklepu);
+                            var idPrzew = model.ZnajdzIdPoPrzew(Przewoznik);
+                            string dataz = DataZam.Date.ToString("yyyy-MM-dd");
+                            string datae = DataEst.Date.ToString("yyyy-MM-dd");
+                            var zamowienie = new Zamowienie(Co,Koszt,dataz, datae, Status,Zwrot,Username,idSklep.ToString(),idPrzew.ToString());
+
+                            if (model.DodajZamDoBazy(zamowienie))
+                            {
+                                CzyscFormularz();
+                                System.Windows.MessageBox.Show("Zamówienie pomyślnie dodane do bazy!");
+                            }
+                        },
+                        //arg => (Co != "") && (Status != null) && (Zwrot != null) && (Username != null) && (NazwaSklepu != null) && (przewoznik != null));
+                        arg => (Co != ""));
+                return dodaj;
+            }
+        }
         #endregion
     }
 }
