@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:Menadżer_Zamówień"
         xmlns:vm="clr-namespace:Menadżer_Zamówień.ViewModel"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="470" Width="800">
 
     <Window.Resources>
         <vm:MainViewModel x:Key="mainVM"/>
@@ -328,31 +329,31 @@
                     <Grid Grid.Column="0">
                         <StackPanel Grid.Column="0" Margin="5,5,5.4,5" Grid.ColumnSpan="3">
                             <TextBlock Text="Co:"/>
-                            <TextBox x:Name="co"/>
+                            <TextBox x:Name="co" MaxLength="20"/>
                             <!-- BINDING -->
                             <TextBlock Text="Koszt:"/>
-                            <TextBox x:Name="koszt"/>
+                            <xctk:DoubleUpDown Value="0" Increment="0.01" FormatString="C2" Minimum="0" Maximum="1000000"/>
                             <!-- BINDING -->
                             <TextBlock Text="Data zamówienia"/>
-                            <TextBox x:Name="data_zam"/>
+                            <DatePicker x:Name="data_zam" SelectedDate="{Binding TabDodajZamowienieVM.DataDzis}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Data estymowanego zamówienia:"/>
-                            <TextBox x:Name="data_est" />
+                            <DatePicker x:Name="data_est" SelectedDate="{Binding TabDodajZamowienieVM.DataDzis}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Status:"/>
-                            <TextBox x:Name="status" />
+                            <ComboBox x:Name="status" ItemsSource="{Binding TabDodajZamowienieVM.Statusy}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Zwrot:"/>
-                            <TextBox x:Name="zwrot" />
+                            <ComboBox x:Name="zwrot" ItemsSource="{Binding TabDodajZamowienieVM.Zwroty}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Username:"/>
-                            <TextBox x:Name="username_Z" />
+                            <ComboBox x:Name="username_Z" ItemsSource="{Binding TabDodajZamowienieVM.Usernames}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Sklep:"/>
-                            <TextBox x:Name="id_s" />
+                            <ComboBox x:Name="id_s" ItemsSource="{Binding TabDodajZamowienieVM.Sklepy}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Przewoźnik:"/>
-                            <TextBox x:Name="id_p" />
+                            <ComboBox x:Name="id_p" ItemsSource="{Binding TabDodajZamowienieVM.Przewoznicy}"/>
                             <!-- BINDING -->
                             <TextBlock />
                             <Grid>

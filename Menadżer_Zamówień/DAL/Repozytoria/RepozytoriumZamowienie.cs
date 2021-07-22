@@ -17,7 +17,6 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             "nazwa, firma from zamowienie z, przewoznik p, sklep s WHERE z.id_sklepu = s.id_sklepu and z.id_p = p.id_p";
         private const string DODAJ_ZAMOWIENIE = "insert into `zamowienie`(`co`, `koszt`, `data_zam`, `data_est`," +
             " `status`, `zwrot`, `id_sklepu`, `id_p`) values";
-
         #endregion
 
         #region metody CRUD
@@ -70,8 +69,6 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             }
             return stan;
         }
-
-        // USUWANIE ZAMÓWIEŃ?
 
         #endregion
     }

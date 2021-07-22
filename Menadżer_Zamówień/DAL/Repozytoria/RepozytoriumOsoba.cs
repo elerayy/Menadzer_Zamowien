@@ -69,6 +69,21 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             return stan;
         }
 
+        // Metoda zbierająca nazwy dostępnych użytkowników
+        public static List<string> PobierzWszystkieUsername()
+        {
+            List<string> usernames = new List<string>();
+            using (var connection = DBConnection.Instance.Connection)
+            {
+                MySqlCommand command = new MySqlCommand(WSZYSTKIE_OSOBY, connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                    usernames.Add(new Osoba(reader).Username);
+                connection.Close();
+            }
+            return usernames;
+        }
         #endregion
     }
 }

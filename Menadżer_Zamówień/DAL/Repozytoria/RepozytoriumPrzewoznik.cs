@@ -30,6 +30,21 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             return przewoznicy;
         }
 
+        public static List<string> PobierzNazwyPrzewoznikow()
+        {
+            List<string> przewoznicy = new List<string>();
+            using (var connection = DBConnection.Instance.Connection)
+            {
+                MySqlCommand command = new MySqlCommand(WSZYSCY_PRZEOWZNICY, connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                    przewoznicy.Add(new Przewoznik(reader).ToString());
+                connection.Close();
+            }
+            return przewoznicy;
+        }
+
         #endregion
     }
 }

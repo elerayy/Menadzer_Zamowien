@@ -30,7 +30,7 @@ namespace Menadżer_Zamówień.DAL.Encje
         #region Metody
         public override string ToString()
         {
-            return $"{IdP}: {Rodzaj} - {Firma}";
+            return $"{Rodzaj} - {Firma}";
 
         }
         #endregion

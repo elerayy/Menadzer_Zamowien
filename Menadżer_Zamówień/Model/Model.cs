@@ -15,6 +15,11 @@ namespace Menadżer_Zamówień.Model
         public ObservableCollection<Zamowienie> Zamowienia { get; set; } = new ObservableCollection<Zamowienie>();
         public ObservableCollection<Sklep> Sklepy { get; set; } = new ObservableCollection<Sklep>();
         public ObservableCollection<Przewoznik> Przewoznicy { get; set; } = new ObservableCollection<Przewoznik>();
+        public ObservableCollection<string> Usernames { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> SklepyString { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> PrzewoznicyString { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> EnumZwrot { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<string> EnumStatus { get; set; } = new ObservableCollection<string>();
 
 
         public Model()
@@ -32,7 +37,15 @@ namespace Menadżer_Zamówień.Model
             var przewoznicy = RepozytoriumPrzewoznik.PobierzPrzewoznikow();
             foreach (var p in przewoznicy)
                 Przewoznicy.Add(p);
-            
+            var usernames = RepozytoriumOsoba.PobierzWszystkieUsername();
+            foreach (var u in usernames)
+                Usernames.Add(u);
+            var sklepyString = RepozytoriumSklep.PobierzNazwySklepow();
+            foreach (var ss in sklepyString)
+                SklepyString.Add(ss);
+            var przewoznicyString = RepozytoriumPrzewoznik.PobierzNazwyPrzewoznikow();
+            foreach (var ps in przewoznicyString)
+                PrzewoznicyString.Add(ps);
         }
 
         public bool CzyJestOsobaWRepo(Osoba osoba) => Osoby.Contains(osoba);
