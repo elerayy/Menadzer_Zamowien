@@ -60,7 +60,7 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             {
                 string EDYTUJ_ZAMOWIENIE = $"UPDATE zamowienie SET co='{zamowienie.Co}', koszt='{zamowienie.Koszt}', " +
                     $"data_zam='{zamowienie.DataZam}', data_est='{zamowienie.DataEst}', status='{zamowienie.Status}'," +
-                    $"zwrot={zamowienie.Zwrot}, username='{zamowienie.Username}', id_sklepu='{zamowienie.IdS}'  " +
+                    $"zwrot='{zamowienie.Zwrot}', username='{zamowienie.Username}', id_sklepu='{zamowienie.IdS}'  " +
                     $"id_p={zamowienie.IdP} WHERE id={id}";
                 MySqlCommand command = new MySqlCommand(EDYTUJ_ZAMOWIENIE, connection);
                 connection.Open();

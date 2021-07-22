@@ -205,7 +205,7 @@
                     <Grid Grid.Column="0">
                     <StackPanel Grid.Column="0" Margin="5,5,5.4,5" Grid.ColumnSpan="3">
                         <TextBlock Text="Username:"/>
-                        <TextBox x:Name="username" Text="{Binding TabDodaOsobeVM.Username}"/>
+                            <TextBox x:Name="username" Text="{Binding TabDodaOsobeVM.Username}" IsEnabled="{Binding TabDodaOsobeVM.DodawanieDostepne}"/>
                         <!-- BINDING -->
                         <TextBlock Text="Imię:"/>
                         <TextBox x:Name="imie" Text="{Binding TabDodaOsobeVM.Imie}"/>
@@ -233,14 +233,21 @@
                             <!-- BINDING -->
                             <Button x:Name="button_Edytuj" Grid.Column="1" Content="Edytuj osobę z bazy" 
                                     Margin="5"
-                                    Command="{Binding TabDodajOsobyVM.Edytuj}"
-                                    IsEnabled="{Binding TabDodajOsobyVM.EdycjaDostepna, Mode=OneWay}"
+                                    Command="{Binding TabDodaOsobeVM.Edytuj}"
+                                    IsEnabled="{Binding TabDodaOsobeVM.EdycjaDostepna, Mode=OneWay}"
                              />
                             <!-- BINDING -->
                         </Grid>
                     </StackPanel>
                     </Grid>
-                    <ListView x:Name="tab_osoby" Grid.Column="1" ItemsSource="{Binding TabDodaOsobeVM.Osoby}">
+                    <ListView x:Name="tab_osoby" Grid.Column="1" ItemsSource="{Binding TabDodaOsobeVM.Osoby}"
+                              SelectedItem="{Binding TabDodaOsobeVM.BiezacaOsoba}"
+                              SelectedIndex="{Binding TabDodaOsobeVM.IdZaznaczenia, Mode=TwoWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding TabDodaOsobeVM.LadujDane}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>

@@ -62,5 +62,21 @@ namespace Menadżer_Zamówień.Model
             }
             return zamowienia;
         }
+
+        public bool EdytujOsobe(Osoba osoba)
+        {
+            if(RepozytoriumOsoba.EdytujOsobe(osoba,osoba.Username))
+            {
+                for(int i=0;i<Osoby.Count;i++)
+                {
+                    if(Osoby[i].Username == osoba.Username)
+                    {
+                        Osoby[i] = new Osoba(osoba);
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }

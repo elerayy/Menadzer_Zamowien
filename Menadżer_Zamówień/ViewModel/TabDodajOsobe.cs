@@ -18,7 +18,9 @@ namespace Menadżer_Zamówień.ViewModel
         private Model model = null;
         private ObservableCollection<Osoba> osoby = null;
         private string username, imie, nazwisko, adres, nrTel;
+        private int idZaznaczenia = -1;
         private bool dodawanieDostepne = true;
+        private bool edycjaDostepna = false;
         #endregion
 
         #region Konstruktory
@@ -38,6 +40,18 @@ namespace Menadżer_Zamówień.ViewModel
             {
                 osoby = value;
                 onPropertyChanged(nameof(Osoby));
+            }
+        }
+
+        public Osoba BiezacaOsoba { get; set; }
+
+        public int IdZaznaczenia
+        {
+            get { return idZaznaczenia; }
+            set
+            {
+                idZaznaczenia = value;
+                onPropertyChanged(nameof(IdZaznaczenia));
             }
         }
 
@@ -101,6 +115,16 @@ namespace Menadżer_Zamówień.ViewModel
             }
         }
 
+        public bool EdycjaDostepna
+        {
+            get { return edycjaDostepna; }
+            set
+            {
+                edycjaDostepna = value;
+                onPropertyChanged(nameof(EdycjaDostepna));
+            }
+        }
+
         public void CzyscFormularz()
         {
             Username = "";
@@ -137,7 +161,60 @@ namespace Menadżer_Zamówień.ViewModel
             }
         }
 
+        private ICommand ladujDane = null;
+        public ICommand LadujDane
+        {
+            get
+            {
+                if(ladujDane == null)
+                    ladujDane = new RelayCommand(
+                        arg =>
+                        {
+                            if(IdZaznaczenia > -1)
+                            {
+                                Username = BiezacaOsoba.Username;
+                                Imie = BiezacaOsoba.Imie;
+                                Nazwisko = BiezacaOsoba.Nazwisko;
+                                Adres = BiezacaOsoba.Adres;
+                                NrTel = BiezacaOsoba.NrTel;
+                                DodawanieDostepne = false;
+                                EdycjaDostepna = true;
+                            }
+                            else
+                            {
+                                Username = "";
+                                Imie = "";
+                                Nazwisko = "";
+                                Adres = "";
+                                NrTel = "";
+                                DodawanieDostepne = true;
+                                EdycjaDostepna = false;
+                            }
+                        },
+                        arg => true);
 
+                return ladujDane;
+            }
+        }
+
+        private ICommand edytuj = null;
+        public ICommand Edytuj
+        {
+            get
+            {
+                if (edytuj == null)
+                    edytuj = new RelayCommand(
+                        arg =>
+                        {
+                            model.EdytujOsobe(new Osoba(Username, Imie, Nazwisko, Adres, NrTel));
+                            IdZaznaczenia = -1;
+                            DodawanieDostepne = true;
+                        },
+                        arg => (BiezacaOsoba?.Imie != Imie) | (BiezacaOsoba?.Nazwisko != Nazwisko) | (BiezacaOsoba?.Adres != Adres) | (BiezacaOsoba?.NrTel != NrTel));
+                
+                return edytuj;
+            }
+        }
         #endregion
     }
 }

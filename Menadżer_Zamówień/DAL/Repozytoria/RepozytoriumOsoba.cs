@@ -57,8 +57,9 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             bool stan = false;
             using (var connection = DBConnection.Instance.Connection)
             {
-                string EDYTUJ_OSOBE = $"UPDATE osoby SET username='{osoba.Username}', imie='{osoba.Imie}', nazwisko='{osoba.Nazwisko}', " +
-                    $"adres={osoba.Adres}, nr_tel='{osoba.NrTel}' WHERE username={username}";
+                string EDYTUJ_OSOBE = $"UPDATE osoby SET imie='{osoba.Imie}', nazwisko='{osoba.Nazwisko}', " +
+                    $"adres='{osoba.Adres}', nr_tel='{osoba.NrTel}' WHERE username='{username}'";
+                Console.WriteLine(EDYTUJ_OSOBE);
                 MySqlCommand command = new MySqlCommand(EDYTUJ_OSOBE, connection);
                 connection.Open();
                 var n = command.ExecuteNonQuery();
