@@ -123,5 +123,22 @@ namespace Menadżer_Zamówień.Model
             }
             return 0; 
         }
+
+        public List<String> DostarczoneDzisiaj(Osoba osoba)
+        {
+            List<string> Dzisiaj = new List<string>();
+            foreach (Menadżer_Zamówień.DAL.Encje.Zamowienie element in Zamowienia)
+            {
+                if (element.Username == osoba.Username)
+                {
+                    if (element.DataEst == DateTime.Today.ToString("dd.MM.yyyy"))
+                    {
+                        string NowaPozcyja = element.Co.ToString() + " " + "(zamówione " + element.DataZam.ToString() + ")";
+                        Dzisiaj.Add(NowaPozcyja);
+                    }
+                }
+            }
+            return Dzisiaj;
+        }
     }
 }

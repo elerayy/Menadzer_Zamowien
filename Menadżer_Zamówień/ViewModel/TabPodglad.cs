@@ -11,6 +11,7 @@ namespace Menadżer_Zamówień.ViewModel
     using Menadżer_Zamówień.DAL.Encje;
     using System.Collections.ObjectModel;
     using System.Windows.Input;
+    using System.Windows;
 
     class TabPodglad : ViewModelBase
     {
@@ -80,6 +81,34 @@ namespace Menadżer_Zamówień.ViewModel
                         },
                         arg => true);
                 return zaladujZamowienia;
+            }
+        }
+
+        private ICommand zamowieniaDzisiaj = null;
+
+        public ICommand ZamowieniaDzisiaj
+        {
+            get
+            {
+                if (zamowieniaDzisiaj == null)
+                {
+                    List<String> ListaZamowien = new List<String>();
+                    zamowieniaDzisiaj = new RelayCommand(
+                        arg =>
+                        {
+                            if (BiezacaOsoba != null)
+                            {
+                                ListaZamowien = model.DostarczoneDzisiaj(BiezacaOsoba);
+                                if (ListaZamowien.Count > 0)
+                                {
+                                    string MessageToShow = "Dzisiaj powinny przyjść zamówienia: " + string.Join(", ", ListaZamowien.ToArray());
+                                    MessageBox.Show(MessageToShow);
+                                }
+                            }
+                        },
+                        arg => true);
+                }
+                return zamowieniaDzisiaj;
             }
         }
 
