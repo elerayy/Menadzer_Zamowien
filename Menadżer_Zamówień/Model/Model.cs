@@ -50,6 +50,38 @@ namespace Menadżer_Zamówień.Model
 
         public bool CzyJestOsobaWRepo(Osoba osoba) => Osoby.Contains(osoba);
 
+        public void OdswiezDane()
+        {
+            Osoby.Clear();
+            Zamowienia.Clear();
+            Sklepy.Clear();
+            Przewoznicy.Clear();
+            Usernames.Clear();
+            PrzewoznicyString.Clear();
+            SklepyString.Clear();
+            var osoby = RepozytoriumOsoba.PobierzWszystkieOsoby();
+            foreach (var o in osoby)
+                Osoby.Add(o);
+            var zamowenia = RepozytoriumZamowienie.PobierzZamowienia();
+            foreach (var z in zamowenia)
+                Zamowienia.Add(z);
+            var sklepy = RepozytoriumSklep.PobierzSklepy();
+            foreach (var s in sklepy)
+                Sklepy.Add(s);
+            var przewoznicy = RepozytoriumPrzewoznik.PobierzPrzewoznikow();
+            foreach (var p in przewoznicy)
+                Przewoznicy.Add(p);
+            var usernames = RepozytoriumOsoba.PobierzWszystkieUsername();
+            foreach (var u in usernames)
+                Usernames.Add(u);
+            var sklepyString = RepozytoriumSklep.PobierzNazwySklepow();
+            foreach (var ss in sklepyString)
+                SklepyString.Add(ss);
+            var przewoznicyString = RepozytoriumPrzewoznik.PobierzNazwyPrzewoznikow();
+            foreach (var ps in przewoznicyString)
+                PrzewoznicyString.Add(ps);
+        }
+
         public bool DodajOsobeDoBazy(Osoba osoba)
         {
             if (!CzyJestOsobaWRepo(osoba))

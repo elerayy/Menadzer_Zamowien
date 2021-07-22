@@ -234,6 +234,7 @@ namespace Menadżer_Zamówień.ViewModel
                             {
                                 CzyscFormularz();
                                 System.Windows.MessageBox.Show("Zamówienie pomyślnie dodane do bazy!");
+                                model.OdswiezDane();
                             }
                         },
                         //arg => (Co != "") && (Status != null) && (Zwrot != null) && (Username != null) && (NazwaSklepu != null) && (przewoznik != null));
