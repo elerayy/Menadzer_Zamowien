@@ -373,8 +373,12 @@ namespace Menadżer_Zamówień.ViewModel
                                 Id = BiezaceZamowienie.Id;
                                 Co = BiezaceZamowienie.Co;
                                 Koszt = BiezaceZamowienie.Koszt;
-                                DataZam = DateTime.Parse(BiezaceZamowienie.DataZam);
-                                DataEst = DateTime.Parse(BiezaceZamowienie.DataEst);
+                                string[] dataZ = BiezaceZamowienie.DataZam.ToString().Split(' ');
+                                dataZ = dataZ[0].Split('.');
+                                DataZam = new DateTime(int.Parse(dataZ[2]), int.Parse(dataZ[1]), int.Parse(dataZ[0])).Date;
+                                string[] dataE = BiezaceZamowienie.DataEst.ToString().Split(' ');
+                                dataE = dataE[0].Split('.');
+                                DataEst = new DateTime(int.Parse(dataE[2]), int.Parse(dataE[1]), int.Parse(dataE[0])).Date;
                                 Status = BiezaceZamowienie.Status;
                                 Zwrot = BiezaceZamowienie.Zwrot;
                                 Username = BiezaceZamowienie.Username;
