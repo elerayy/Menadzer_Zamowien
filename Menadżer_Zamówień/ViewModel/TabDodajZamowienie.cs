@@ -389,8 +389,8 @@ namespace Menadżer_Zamówień.ViewModel
                             {
                                 Co = "";
                                 Koszt = 0;
-                                DataZam = new DateTime();
-                                DataEst = new DateTime();
+                                DataZam = DateTime.Now.Date;
+                                DataEst = DateTime.Now.Date;
                                 Status = "";
                                 Zwrot = "";
                                 Username = "";
@@ -420,6 +420,7 @@ namespace Menadżer_Zamówień.ViewModel
                             model.EdytujZamowienie(new Zamowienie(Co, Koszt, DataZam.Date.ToString("yyyy-MM-dd"), DataEst.Date.ToString("yyyy-MM-dd"), Status, Zwrot, Username, IdS, IdP), BiezaceZamowienie.Id);
                             IdZaznaczenia = -1;
                             DodawanieDostepne = true;
+                            model.OdswiezDane();
                         },
                         arg => (BiezaceZamowienie?.Co != Co) | (BiezaceZamowienie?.Koszt != Koszt) | (BiezaceZamowienie?.DataZam != DataZam.Date.ToString("yyyy-MM-dd")) | (BiezaceZamowienie?.DataEst != DataEst.Date.ToString("yyyy-MM-dd")) | (BiezaceZamowienie?.Status != Status) | (BiezaceZamowienie?.Zwrot != Zwrot) | (BiezaceZamowienie?.Username != Username) | (BiezaceZamowienie?.IdS != IdS) | (BiezaceZamowienie?.IdP != IdP));
 
