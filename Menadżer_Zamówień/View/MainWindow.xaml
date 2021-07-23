@@ -16,6 +16,13 @@
 
     <Grid DataContext="{StaticResource mainVM}">
         <TabControl>
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Background" Value="LightSteelBlue"/>
+                    <Setter Property="FontFamily" Value="Century Gothic"/>
+
+                </Style>
+            </TabControl.Resources>
             <!-- karta z podglądem użytkowików i ich zamówień-->
             <TabItem x:Name="podglad" Header="Podgląd">
                 <Grid>
@@ -28,6 +35,22 @@
                     <ListView x:Name="osoby" Grid.Column="0" ItemsSource="{Binding TabPodgladVM.Osoby}"
                               SelectedItem="{Binding TabPodgladVM.BiezacaOsoba}"
                               SelectedIndex="{Binding TabPodgladVM.IndexZaznaczonejOsoby, Mode=TwoWay}">
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Background" Value="Lavender"/>
+                            </Style>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="FontFamily" Value="Century Gothic"/>
+                                <Style.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" Value="LavenderBlush"/>
+                                    </MultiTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.Resources>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding TabPodgladVM.ZaladujZamowienia}"/>
@@ -79,6 +102,22 @@
 
                     <!-- lista zamówień -->
                     <ListView x:Name="zamowienia" Grid.Column="2" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding TabPodgladVM.Zamowienia}">
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Background" Value="Lavender"/>
+                            </Style>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="FontFamily" Value="Century Gothic"/>
+                                <Style.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" Value="LavenderBlush"/>
+                                    </MultiTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.Resources>
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -222,19 +261,17 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="button_Dodaj" Grid.Column="0" Content="Dodaj osobę do bazy"
+                                <Button x:Name="button_Dodaj" Grid.Column="0" Content="Dodaj osobę do bazy"
                                     Margin="5"
                                     Command="{Binding TabDodaOsobeVM.Dodaj}"
                                     IsEnabled="{Binding TabDodaOsobeVM.DodawanieDostepne, Mode=OneWay}"
                              />
-                            <!-- BINDING -->
-                            <Button x:Name="button_Edytuj" Grid.Column="1" Content="Edytuj osobę z bazy" 
+                                <Button x:Name="button_Edytuj" Grid.Column="1" Content="Edytuj osobę z bazy" 
                                     Margin="5"
                                     Command="{Binding TabDodaOsobeVM.Edytuj}"
                                     IsEnabled="{Binding TabDodaOsobeVM.EdycjaDostepna, Mode=OneWay}"
                              />
-                            <!-- BINDING -->
-                        </Grid>
+                            </Grid>
                     </StackPanel>
                     </Grid>
                     <ListView x:Name="tab_osoby" Grid.Column="1" ItemsSource="{Binding TabDodaOsobeVM.Osoby}"
@@ -245,6 +282,22 @@
                                 <i:InvokeCommandAction Command="{Binding TabDodaOsobeVM.LadujDane}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Background" Value="Lavender"/>
+                            </Style>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="FontFamily" Value="Century Gothic"/>
+                                <Style.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" Value="LavenderBlush"/>
+                                    </MultiTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.Resources>
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -333,7 +386,7 @@
                             <TextBlock Text="Data zamówienia"/>
                             <DatePicker x:Name="data_zam" SelectedDate="{Binding TabDodajZamowienieVM.DataZam}" 
                                         IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"/>
-                            <TextBlock Text="Data estymowanego zamówienia:"/>
+                            <TextBlock Text="Data estymowanego doręczenia:"/>
                             <DatePicker x:Name="data_est" SelectedDate="{Binding TabDodajZamowienieVM.DataEst}"
                                         IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"/>
                             <TextBlock Text="Status:"/>
@@ -392,12 +445,25 @@
                                 <i:InvokeCommandAction Command="{Binding TabDodajZamowienieVM.LadujDane}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Background" Value="Lavender"/>
+                            </Style>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="FontFamily" Value="Century Gothic"/>
+                                <Style.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" Value="LavenderBlush"/>
+                                    </MultiTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.Resources>
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-
-
-                                    
                                     <!-- kolumna co -->
                                     <GridViewColumn Width="100" x:Name="tab_kol_co">
                                         <GridViewColumn.CellTemplate>
@@ -524,6 +590,23 @@
                     </Grid.ColumnDefinitions>
 
                     <ListView x:Name="tab_sklepy" Grid.Column="0" ItemsSource="{Binding TabPodgladSklepPrzewoznikVM.Sklepy}">
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Background" Value="Lavender"/>
+                            </Style>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="FontFamily" Value="Century Gothic"/>
+                                <Style.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" Value="LavenderBlush"/>
+                                    </MultiTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.Resources>
+     
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -568,6 +651,22 @@
                     </ListView>
 
                     <ListView x:Name="tab_przewoznicy" Grid.Column="2" ItemsSource="{Binding TabPodgladSklepPrzewoznikVM.Przewoznicy}">
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Background" Value="Lavender"/>
+                            </Style>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="FontFamily" Value="Century Gothic"/>
+                                <Style.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background" Value="LavenderBlush"/>
+                                    </MultiTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.Resources>
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
