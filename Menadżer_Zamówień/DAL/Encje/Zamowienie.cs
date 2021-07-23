@@ -70,7 +70,7 @@ namespace Menadżer_Zamówień.DAL.Encje
             //IdS = sbyte.Parse(reader["id_sklepu"].ToString());
             //IdP = sbyte.Parse(reader["id_p"].ToString());
             IdS = reader["nazwa"].ToString();
-            IdP = reader["firma"].ToString();
+            IdP = reader["rodzaj"].ToString() + "-" + reader["firma"].ToString();
         }
 
         // Konstruktor tworzący nowy obiekt

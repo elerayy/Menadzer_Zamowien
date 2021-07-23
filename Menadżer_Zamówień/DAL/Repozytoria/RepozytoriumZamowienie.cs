@@ -17,7 +17,7 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
 
         private const string WSZYSTKIE_ZAMOWIENIA = "Select * from zamowienie";
         private const string ZAMOWIENIA_LEPIEJ = "select id, co, koszt, data_zam, data_est, status, zwrot, username, " +
-            "nazwa, firma from zamowienie z, przewoznik p, sklep s WHERE z.id_sklepu = s.id_sklepu and z.id_p = p.id_p";
+            "nazwa, rodzaj, firma from zamowienie z, przewoznik p, sklep s WHERE z.id_sklepu = s.id_sklepu and z.id_p = p.id_p";
         private const string DODAJ_ZAMOWIENIE = "insert into `zamowienie`(`co`, `koszt`, `data_zam`, `data_est`," +
             " `status`, `zwrot`, `username`, `id_sklepu`, `id_p`) values";
         #endregion
@@ -56,14 +56,14 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             return stan;
         }
 
-        public static bool EdytujZamowienie(Zamowienie zamowienie, sbyte id)
+        public static bool EdytujZamowienie(Zamowienie zamowienie, sbyte? id)
         {
             bool stan = false;
             using (var connection = DBConnection.Instance.Connection)
             {
                 string EDYTUJ_ZAMOWIENIE = $"UPDATE zamowienie SET co='{zamowienie.Co}', koszt='{zamowienie.Koszt}', " +
                     $"data_zam='{zamowienie.DataZam}', data_est='{zamowienie.DataEst}', status='{zamowienie.Status}'," +
-                    $"zwrot='{zamowienie.Zwrot}', username='{zamowienie.Username}', id_sklepu='{zamowienie.IdS}'  " +
+                    $"zwrot='{zamowienie.Zwrot}', username='{zamowienie.Username}', id_sklepu='{zamowienie.IdS}',  " +
                     $"id_p={zamowienie.IdP} WHERE id={id}";
                 MySqlCommand command = new MySqlCommand(EDYTUJ_ZAMOWIENIE, connection);
                 connection.Open();

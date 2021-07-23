@@ -172,5 +172,25 @@ namespace Menadżer_Zamówień.Model
             }
             return Dzisiaj;
         }
+
+        public bool EdytujZamowienie(Zamowienie zamowienie, sbyte? id)
+        {
+            zamowienie.IdP = ZnajdzIdPoPrzew(zamowienie.IdP).ToString();
+            zamowienie.IdS = ZnajdzIdPoSklepie(zamowienie.IdS).ToString();
+            Console.WriteLine("ID" + zamowienie.Id);
+            if (RepozytoriumZamowienie.EdytujZamowienie(zamowienie, id))
+            {
+                for (int i = 0; i < Zamowienia.Count; i++)
+                {
+                    if (Zamowienia[i].Id == id)
+                    {
+                        zamowienie.Id = id;
+                        Zamowienia[i] = new Zamowienie(zamowienie);
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }

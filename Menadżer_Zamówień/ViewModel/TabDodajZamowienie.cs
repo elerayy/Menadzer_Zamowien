@@ -25,7 +25,9 @@ namespace Menadżer_Zamówień.ViewModel
         private List<string> zwroty = new List<string>{ "tak", "nie" };
         private List<string> statusy = new List<string> { "w trakcie", "odebrane" };
         private bool dodawanieDostepne = true;
-        private string co, status, zwrot, username, nazwaSklepu, przewoznik = "";
+        private bool edycjaDostepna = false;
+        private sbyte? id;
+        private string co, status, zwrot, username, nazwaSklepu, przewoznik, idP, idS = "";
         private DateTime dataEst = DateTime.Now.Date;
         private DateTime dataZam = DateTime.Now.Date;
         private float koszt = 0.0F;
@@ -34,6 +36,7 @@ namespace Menadżer_Zamówień.ViewModel
         private int idNazwaSklep = -1;
         private int idTypPrzew = -1;
         private int idUsername= -1;
+        private int idZaznaczenia = -1;
         #endregion
 
         #region Konstruktory
@@ -48,6 +51,29 @@ namespace Menadżer_Zamówień.ViewModel
         #endregion
 
         #region Właściwości
+
+        public Zamowienie BiezaceZamowienie { get; set; }
+
+        public int IdZaznaczenia
+        {
+            get { return idZaznaczenia; }
+            set
+            {
+                idZaznaczenia = value;
+                onPropertyChanged(nameof(IdZaznaczenia));
+            }
+        }
+
+        public bool EdycjaDostepna
+        {
+            get { return edycjaDostepna; }
+            set
+            {
+                edycjaDostepna = value;
+                onPropertyChanged(nameof(EdycjaDostepna));
+            }
+        }
+
         public ObservableCollection<Zamowienie> Zamowienia
         {
             get { return zamowienia; }
@@ -142,6 +168,36 @@ namespace Menadżer_Zamówień.ViewModel
             {
                 przewoznik = value;
                 onPropertyChanged(nameof(Przewoznik));
+            }
+        }
+
+        public string IdS
+        {
+            get { return idS; }
+            set
+            {
+                idS = value;
+                onPropertyChanged(nameof(IdS));
+            }
+        }
+
+        public string IdP
+        {
+            get { return idP; }
+            set
+            {
+                idP = value;
+                onPropertyChanged(nameof(IdP));
+            }
+        }
+
+        public sbyte? Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                onPropertyChanged(nameof(Id));
             }
         }
 
@@ -302,6 +358,75 @@ namespace Menadżer_Zamówień.ViewModel
                 return dodaj;
             }
         }
+
+        private ICommand ladujDane;
+        public ICommand LadujDane
+        {
+            get
+            {
+                if (ladujDane == null)
+                    ladujDane = new RelayCommand(
+                        arg =>
+                        {
+                            if (IdZaznaczenia > -1)
+                            {
+                                Id = BiezaceZamowienie.Id;
+                                Co = BiezaceZamowienie.Co;
+                                Koszt = BiezaceZamowienie.Koszt;
+                                DataZam = DateTime.Parse(BiezaceZamowienie.DataZam);
+                                DataEst = DateTime.Parse(BiezaceZamowienie.DataEst);
+                                Status = BiezaceZamowienie.Status;
+                                Zwrot = BiezaceZamowienie.Zwrot;
+                                Username = BiezaceZamowienie.Username;
+                                NazwaSklepu = BiezaceZamowienie.IdS;
+                                Przewoznik = BiezaceZamowienie.IdP;
+                                IdS = BiezaceZamowienie.IdS;
+                                IdP = BiezaceZamowienie.IdP;
+                                DodawanieDostepne = false;
+                                EdycjaDostepna = true;
+                            }
+                            else
+                            {
+                                Co = "";
+                                Koszt = 0;
+                                DataZam = new DateTime();
+                                DataEst = new DateTime();
+                                Status = "";
+                                Zwrot = "";
+                                Username = "";
+                                IdS = null;
+                                IdP = null;
+                                NazwaSklepu = "";
+                                Przewoznik = "";
+                                DodawanieDostepne = true;
+                                EdycjaDostepna = false;
+                            }
+                        },
+                        arg => true);
+
+                return ladujDane;
+            }
+        }
+
+        private ICommand edytujZamowienie = null;
+        public ICommand EdytujZamowienie
+        {
+            get
+            {
+                if (edytujZamowienie == null)
+                    edytujZamowienie = new RelayCommand(
+                        arg =>
+                        {
+                            model.EdytujZamowienie(new Zamowienie(Co, Koszt, DataZam.Date.ToString("yyyy-MM-dd"), DataEst.Date.ToString("yyyy-MM-dd"), Status, Zwrot, Username, IdS, IdP), BiezaceZamowienie.Id);
+                            IdZaznaczenia = -1;
+                            DodawanieDostepne = true;
+                        },
+                        arg => (BiezaceZamowienie?.Co != Co) | (BiezaceZamowienie?.Koszt != Koszt) | (BiezaceZamowienie?.DataZam != DataZam.Date.ToString("yyyy-MM-dd")) | (BiezaceZamowienie?.DataEst != DataEst.Date.ToString("yyyy-MM-dd")) | (BiezaceZamowienie?.Status != Status) | (BiezaceZamowienie?.Zwrot != Zwrot) | (BiezaceZamowienie?.Username != Username) | (BiezaceZamowienie?.IdS != IdS) | (BiezaceZamowienie?.IdP != IdP));
+
+                return edytujZamowienie;
+            }
+        }
+
         #endregion
     }
 }
