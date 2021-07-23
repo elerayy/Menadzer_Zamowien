@@ -11,6 +11,7 @@ namespace Menadżer_Zamówień.ViewModel
     using Menadżer_Zamówień.DAL.Encje;
     using System.Collections.ObjectModel;
     using System.Windows.Input;
+    using System.Globalization;
 
     class TabDodajZamowienie : ViewModelBase
     {
@@ -24,9 +25,15 @@ namespace Menadżer_Zamówień.ViewModel
         private List<string> zwroty = new List<string>{ "tak", "nie" };
         private List<string> statusy = new List<string> { "w trakcie", "odebrane" };
         private bool dodawanieDostepne = true;
-        private string co, status, zwrot, username, nazwaSklepu, przewoznik;
-        private DateTime dataEst, dataZam;
-        private float koszt;
+        private string co, status, zwrot, username, nazwaSklepu, przewoznik = "";
+        private DateTime dataEst = DateTime.Now.Date;
+        private DateTime dataZam = DateTime.Now.Date;
+        private float koszt = 0.0F;
+        private int idStatus = -1;
+        private int idZwrot = -1;
+        private int idNazwaSklep = -1;
+        private int idTypPrzew = -1;
+        private int idUsername= -1;
         #endregion
 
         #region Konstruktory
@@ -204,13 +211,67 @@ namespace Menadżer_Zamówień.ViewModel
                 onPropertyChanged(nameof(DodawanieDostepne));
             }
         }
+
+        public int IdStatus
+        {
+            get { return idStatus; }
+            set
+            {
+                idStatus = value;
+                onPropertyChanged(nameof(IdStatus));
+            }
+        }
+
+        public int IdZwrot
+        {
+            get { return idZwrot; }
+            set
+            {
+                idZwrot = value;
+                onPropertyChanged(nameof(IdZwrot));
+            }
+        }
+
+        public int IdUsername
+        {
+            get { return idUsername; }
+            set
+            {
+                idUsername = value;
+                onPropertyChanged(nameof(IdUsername));
+            }
+        }
+
+        public int IdTypPrzew
+        {
+            get { return idTypPrzew; }
+            set
+            {
+                idTypPrzew = value;
+                onPropertyChanged(nameof(IdTypPrzew));
+            }
+        }
+
+        public int IdNazwaSklep
+        {
+            get { return idNazwaSklep; }
+            set
+            {
+                idNazwaSklep = value;
+                onPropertyChanged(nameof(IdNazwaSklep));
+            }
+        }
         #endregion
 
         #region Polecenia
         public void CzyscFormularz()
         {
             Co = "";
-            Koszt = 0;
+            Koszt = 0.0F;
+            DataZam = DataDzis;
+            DataEst = DataDzis;
+            Status = null;
+            Zwrot = null;
             DodawanieDostepne = true;
         }
 
@@ -229,16 +290,15 @@ namespace Menadżer_Zamówień.ViewModel
                             string dataz = DataZam.Date.ToString("yyyy-MM-dd");
                             string datae = DataEst.Date.ToString("yyyy-MM-dd");
                             var zamowienie = new Zamowienie(Co,Koszt,dataz, datae, Status,Zwrot,Username,idSklep.ToString(),idPrzew.ToString());
-
+                            
                             if (model.DodajZamDoBazy(zamowienie))
                             {
                                 CzyscFormularz();
-                                System.Windows.MessageBox.Show("Zamówienie pomyślnie dodane do bazy!");
                                 model.OdswiezDane();
+                                System.Windows.MessageBox.Show("Zamówienie pomyślnie dodane do bazy!");
                             }
                         },
-                        //arg => (Co != "") && (Status != null) && (Zwrot != null) && (Username != null) && (NazwaSklepu != null) && (przewoznik != null));
-                        arg => (Co != ""));
+                        arg => (Co != "") && (IdStatus > -1) && (IdZwrot > -1) && (IdUsername > -1) && (IdNazwaSklep > -1) && (IdTypPrzew > -1));
                 return dodaj;
             }
         }

@@ -343,23 +343,28 @@
                             <!-- BINDING -->
                             <TextBlock Text="Status:"/>
                             <ComboBox x:Name="status" ItemsSource="{Binding TabDodajZamowienieVM.Statusy}"
-                                      SelectedValue="{Binding TabDodajZamowienieVM.Status}"/>
+                                      SelectedValue="{Binding TabDodajZamowienieVM.Status}"
+                                      SelectedIndex="{Binding TabDodajZamowienieVM.IdStatus}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Zwrot:"/>
                             <ComboBox x:Name="zwrot" ItemsSource="{Binding TabDodajZamowienieVM.Zwroty}"
-                                      SelectedValue="{Binding TabDodajZamowienieVM.Zwrot}"/>
+                                      SelectedValue="{Binding TabDodajZamowienieVM.Zwrot}"
+                                      SelectedIndex="{Binding TabDodajZamowienieVM.IdZwrot}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Username:"/>
                             <ComboBox x:Name="username_Z" ItemsSource="{Binding TabDodajZamowienieVM.Usernames}"
-                                SelectedValue="{Binding TabDodajZamowienieVM.Username}"/>
+                                      SelectedValue="{Binding TabDodajZamowienieVM.Username}"
+                                      SelectedIndex="{Binding TabDodajZamowienieVM.IdUsername}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Sklep:"/>
                             <ComboBox x:Name="id_s" ItemsSource="{Binding TabDodajZamowienieVM.Sklepy}"
-                                      SelectedValue="{Binding TabDodajZamowienieVM.NazwaSklepu}"/>
+                                      SelectedValue="{Binding TabDodajZamowienieVM.NazwaSklepu}"
+                                      SelectedIndex="{Binding TabDodajZamowienieVM.IdNazwaSklep}"/>
                             <!-- BINDING -->
                             <TextBlock Text="Przewoźnik:"/>
                             <ComboBox x:Name="id_p" ItemsSource="{Binding TabDodajZamowienieVM.Przewoznicy}"
-                                      SelectedValue="{Binding TabDodajZamowienieVM.Przewoznik}"/>
+                                      SelectedValue="{Binding TabDodajZamowienieVM.Przewoznik}"
+                                      SelectedIndex="{Binding TabDodajZamowienieVM.IdTypPrzew}"/>
                             <!-- BINDING -->
                             <TextBlock />
                             <Grid>

@@ -34,8 +34,36 @@ namespace Menadżer_Zamówień.DAL.Encje
             Id = sbyte.Parse(reader["id"].ToString());
             Co = reader["co"].ToString();
             Koszt = float.Parse(reader["koszt"].ToString());
-            DataZam = (reader["data_zam"].ToString()).Substring(0, 10);
-            DataEst = (reader["data_est"].ToString()).Substring(0, 10);
+            string dataZD = (reader["data_zam"].ToString());
+            string[] dataZTab = dataZD.Split(' ');
+            if (dataZD.Contains("/"))
+            {
+                dataZTab = dataZTab[0].Split('/');
+                for (int i = 0; i < dataZTab.Length; i++)
+                {
+                    if (dataZTab[i].Length == 1)
+                        dataZTab[i] = "0" + dataZTab[i];
+                }
+                DataZam = dataZTab[1] + "." + dataZTab[0] + "." + dataZTab[2];
+            }
+            else
+                DataZam = dataZTab[0];
+
+            string dataED = (reader["data_est"].ToString());
+            string[] dataETab = dataED.Split(' ');
+            if (dataED.Contains("/"))
+            {
+                dataETab = dataETab[0].Split('/');
+                for (int i = 0; i < dataETab.Length; i++)
+                {
+                    if (dataETab[i].Length == 1)
+                        dataETab[i] = "0" + dataETab[i];
+                }
+                DataEst = dataETab[1] + "." + dataETab[0] + "." + dataETab[2];
+            }
+            else
+                DataEst = dataETab[0];
+
             Status = reader["status"].ToString();
             Zwrot = reader["zwrot"].ToString();
             Username = reader["username"].ToString();

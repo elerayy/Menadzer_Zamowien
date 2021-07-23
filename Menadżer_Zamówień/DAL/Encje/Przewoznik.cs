@@ -31,7 +31,6 @@ namespace Menadżer_Zamówień.DAL.Encje
         public override string ToString()
         {
             return $"{Rodzaj} - {Firma}";
-
         }
         #endregion
     }

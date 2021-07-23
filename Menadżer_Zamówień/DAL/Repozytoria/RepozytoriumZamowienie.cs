@@ -46,8 +46,6 @@ namespace Menadżer_Zamówień.DAL.Repozytoria
             bool stan = false;
             using (var connection = DBConnection.Instance.Connection)
             {
-                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                Console.WriteLine($"{DODAJ_ZAMOWIENIE} {zamowienie.ToInsert()}");
                 MySqlCommand command = new MySqlCommand($"{DODAJ_ZAMOWIENIE} {zamowienie.ToInsert()}", connection);
                 connection.Open();
                 var id = command.ExecuteNonQuery();
