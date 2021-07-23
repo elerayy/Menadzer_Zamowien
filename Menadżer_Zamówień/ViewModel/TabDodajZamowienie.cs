@@ -427,6 +427,18 @@ namespace Menadżer_Zamówień.ViewModel
             }
         }
 
+        private ICommand updateUsernames;
+        public ICommand UpdateUsernames
+        {
+            get
+            {
+                return updateUsernames ?? (updateUsernames = new RelayCommand(
+                    p => { Usernames = model.UpdateUsers(); },
+                    p => true
+                    ));
+            }
+        }
+
         #endregion
     }
 }

@@ -355,7 +355,13 @@
                             <ComboBox x:Name="username_Z" ItemsSource="{Binding TabDodajZamowienieVM.Usernames}"
                                       IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"
                                       SelectedValue="{Binding TabDodajZamowienieVM.Username}"
-                                      SelectedIndex="{Binding TabDodajZamowienieVM.IdUsername}"/>
+                                      SelectedIndex="{Binding TabDodajZamowienieVM.IdUsername}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="DropDownOpened">
+                                        <i:InvokeCommandAction Command="{Binding TabDodajZamowienieVM.UpdateUsernames}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
                             <!-- BINDING -->
                             <TextBlock Text="Sklep:"/>
                             <ComboBox x:Name="id_s" ItemsSource="{Binding TabDodajZamowienieVM.Sklepy}"

@@ -50,6 +50,16 @@ namespace Menadżer_Zamówień.Model
 
         public bool CzyJestOsobaWRepo(Osoba osoba) => Osoby.Contains(osoba);
 
+        public ObservableCollection<string> UpdateUsers()
+        {
+            Usernames.Clear();
+            var usernames = RepozytoriumOsoba.PobierzWszystkieUsername();
+            foreach (var u in usernames)
+                Usernames.Add(u);
+
+            return Usernames;
+        }
+
         public void OdswiezDane()
         {
             Osoby.Clear();
