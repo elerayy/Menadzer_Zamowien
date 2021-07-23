@@ -8,7 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="470" Width="800">
+        Title="Menadżer Zamówień" Height="470" Width="800">
 
     <Window.Resources>
         <vm:MainViewModel x:Key="mainVM"/>
@@ -198,7 +198,7 @@
                 </Grid>
             </TabItem>
             <!-- karta z możliwością dodania i edycji użytkownika -->
-            <TabItem x:Name="dod_osobe" Header="Dodaj osobę">
+            <TabItem x:Name="dod_osobe" Header="Osoby">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
@@ -208,20 +208,15 @@
                     <StackPanel Grid.Column="0" Margin="5,5,5.4,5" Grid.ColumnSpan="3">
                         <TextBlock Text="Username:"/>
                             <TextBox x:Name="username" Text="{Binding TabDodaOsobeVM.Username}" IsEnabled="{Binding TabDodaOsobeVM.DodawanieDostepne}"/>
-                        <!-- BINDING -->
-                        <TextBlock Text="Imię:"/>
-                        <TextBox x:Name="imie" Text="{Binding TabDodaOsobeVM.Imie}"/>
-                        <!-- BINDING -->
-                        <TextBlock Text="Nazwisko:"/>
-                        <TextBox x:Name="nazwisko" Text="{Binding TabDodaOsobeVM.Nazwisko}"/>
-                        <!-- BINDING -->
-                        <TextBlock Text="Adres"/>
-                        <TextBox x:Name="adres" Text="{Binding TabDodaOsobeVM.Adres}"/>
-                        <!-- BINDING -->
-                        <TextBlock Text="Numer telefonu:"/>
-                        <TextBox x:Name="nrTel" Text="{Binding TabDodaOsobeVM.NrTel}"/>
-                        <!-- BINDING -->
-                        <TextBlock />
+                            <TextBlock Text="Imię:"/>
+                            <TextBox x:Name="imie" Text="{Binding TabDodaOsobeVM.Imie}"/>
+                            <TextBlock Text="Nazwisko:"/>
+                            <TextBox x:Name="nazwisko" Text="{Binding TabDodaOsobeVM.Nazwisko}"/>
+                            <TextBlock Text="Adres"/>
+                            <TextBox x:Name="adres" Text="{Binding TabDodaOsobeVM.Adres}"/>
+                            <TextBlock Text="Numer telefonu:"/>
+                            <TextBox x:Name="nrTel" Text="{Binding TabDodaOsobeVM.NrTel}"/>
+                            <TextBlock />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -321,7 +316,7 @@
                 </Grid>
             </TabItem>
             <!-- karta z możliwością dodania i edycji zamówienia -->
-            <TabItem x:Name="dod_zam" Header="Dodaj zamówienie">
+            <TabItem x:Name="dod_zam" Header="Zamówienia">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"/>
@@ -330,27 +325,25 @@
                     <Grid Grid.Column="0">
                         <StackPanel Grid.Column="0" Margin="5,5,5.4,5" Grid.ColumnSpan="3">
                             <TextBlock Text="Co:"/>
-                            <TextBox x:Name="co" MaxLength="20" Text="{Binding TabDodajZamowienieVM.Co}"/>
-                            <!-- BINDING -->
+                            <TextBox x:Name="co" MaxLength="20" Text="{Binding TabDodajZamowienieVM.Co}"
+                                     IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"/>
                             <TextBlock Text="Koszt:"/>
-                            <xctk:DoubleUpDown DefaultValue="0" Value="{Binding TabDodajZamowienieVM.Koszt}" Increment="0.01" FormatString="F2" Minimum="0" Maximum="1000000" CultureInfo="en-US"/>
-                            <!-- BINDING -->
+                            <xctk:DoubleUpDown DefaultValue="0" Value="{Binding TabDodajZamowienieVM.Koszt}" Increment="0.01" FormatString="F2" Minimum="0" Maximum="1000000" CultureInfo="en-US"
+                                               IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"/>
                             <TextBlock Text="Data zamówienia"/>
-                            <DatePicker x:Name="data_zam" SelectedDate="{Binding TabDodajZamowienieVM.DataZam}" />
-                            <!-- BINDING -->
+                            <DatePicker x:Name="data_zam" SelectedDate="{Binding TabDodajZamowienieVM.DataZam}" 
+                                        IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"/>
                             <TextBlock Text="Data estymowanego zamówienia:"/>
-                            <DatePicker x:Name="data_est" SelectedDate="{Binding TabDodajZamowienieVM.DataEst}"/>
-                            <!-- BINDING -->
+                            <DatePicker x:Name="data_est" SelectedDate="{Binding TabDodajZamowienieVM.DataEst}"
+                                        IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"/>
                             <TextBlock Text="Status:"/>
                             <ComboBox x:Name="status" ItemsSource="{Binding TabDodajZamowienieVM.Statusy}"
                                       SelectedValue="{Binding TabDodajZamowienieVM.Status}"
                                       SelectedIndex="{Binding TabDodajZamowienieVM.IdStatus}"/>
-                            <!-- BINDING -->
                             <TextBlock Text="Zwrot:"/>
                             <ComboBox x:Name="zwrot" ItemsSource="{Binding TabDodajZamowienieVM.Zwroty}"
                                       SelectedValue="{Binding TabDodajZamowienieVM.Zwrot}"
                                       SelectedIndex="{Binding TabDodajZamowienieVM.IdZwrot}"/>
-                            <!-- BINDING -->
                             <TextBlock Text="Username:"/>
                             <ComboBox x:Name="username_Z" ItemsSource="{Binding TabDodajZamowienieVM.Usernames}"
                                       IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"
@@ -362,17 +355,16 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </ComboBox>
-                            <!-- BINDING -->
                             <TextBlock Text="Sklep:"/>
                             <ComboBox x:Name="id_s" ItemsSource="{Binding TabDodajZamowienieVM.Sklepy}"
+                                      IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"
                                       SelectedValue="{Binding TabDodajZamowienieVM.NazwaSklepu}"
                                       SelectedIndex="{Binding TabDodajZamowienieVM.IdNazwaSklep}"/>
-                            <!-- BINDING -->
                             <TextBlock Text="Przewoźnik:"/>
                             <ComboBox x:Name="id_p" ItemsSource="{Binding TabDodajZamowienieVM.Przewoznicy}"
+                                      IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"
                                       SelectedValue="{Binding TabDodajZamowienieVM.Przewoznik}"
                                       SelectedIndex="{Binding TabDodajZamowienieVM.IdTypPrzew}"/>
-                            <!-- BINDING -->
                             <TextBlock />
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -384,13 +376,11 @@
                                     Command="{Binding TabDodajZamowienieVM.Dodaj}"
                                     IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne, Mode=OneWay}"
                              />
-                                <!-- BINDING -->
                                 <Button x:Name="button_Edytuj_Zam" Grid.Column="1" Content="Edytuj" 
                                     Margin="5"
                                     Command="{Binding TabDodajZamowienieVM.EdytujZamowienie}"
                                     IsEnabled="{Binding TabDodajZamowienieVM.EdycjaDostepna, Mode=OneWay}"
                              />
-                                <!-- BINDING -->
                             </Grid>
                         </StackPanel>
                     </Grid>
@@ -405,6 +395,9 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
+
+
+                                    
                                     <!-- kolumna co -->
                                     <GridViewColumn Width="100" x:Name="tab_kol_co">
                                         <GridViewColumn.CellTemplate>
@@ -477,6 +470,18 @@
                                         </GridViewColumn.Header>
                                     </GridViewColumn>
 
+                                    <!-- kolumna username -->
+                                    <GridViewColumn Width="100" x:Name="tab_kol_username">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Username}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                        <GridViewColumn.Header>
+                                            <TextBlock Text="Username" Width="{Binding ActualWidth}"/>
+                                        </GridViewColumn.Header>
+                                    </GridViewColumn>
+
                                     <!-- kolumna sklep -->
                                     <GridViewColumn>
                                         <GridViewColumn.CellTemplate>
@@ -510,7 +515,7 @@
                 
             </TabItem>
             <!-- karta z listą dostępnych sklepów i przewoźników -->
-            <TabItem x:Name="lista_skl_przew" Header="Lista sklepów i przewoźników">
+            <TabItem x:Name="lista_skl_przew" Header="Sklepy i przewoźnicy">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*"/>
