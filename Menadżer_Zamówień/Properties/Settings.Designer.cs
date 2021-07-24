@@ -43,7 +43,7 @@ namespace Menadżer_Zamówień.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("root")]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
         public string userID {
             get {
                 return ((string)(this["userID"]));
@@ -52,7 +52,7 @@ namespace Menadżer_Zamówień.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Zaq12wsx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin123")]
         public string passwd {
             get {
                 return ((string)(this["passwd"]));
