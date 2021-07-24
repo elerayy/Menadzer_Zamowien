@@ -246,15 +246,21 @@
                     <Grid Grid.Column="0">
                     <StackPanel Grid.Column="0" Margin="5,5,5.4,5" Grid.ColumnSpan="3">
                         <TextBlock Text="Username:"/>
-                            <TextBox x:Name="username" Text="{Binding TabDodaOsobeVM.Username}" IsEnabled="{Binding TabDodaOsobeVM.DodawanieDostepne}"/>
+                            <TextBox x:Name="username" Text="{Binding TabDodaOsobeVM.Username}" 
+                                     IsEnabled="{Binding TabDodaOsobeVM.DodawanieDostepne}"
+                                     MaxLength="15"/>
                             <TextBlock Text="Imię:"/>
-                            <TextBox x:Name="imie" Text="{Binding TabDodaOsobeVM.Imie}"/>
+                            <TextBox x:Name="imie" Text="{Binding TabDodaOsobeVM.Imie}"
+                                     MaxLength="15"/>
                             <TextBlock Text="Nazwisko:"/>
-                            <TextBox x:Name="nazwisko" Text="{Binding TabDodaOsobeVM.Nazwisko}"/>
+                            <TextBox x:Name="nazwisko" Text="{Binding TabDodaOsobeVM.Nazwisko}"
+                                     MaxLength="20"/>
                             <TextBlock Text="Adres"/>
-                            <TextBox x:Name="adres" Text="{Binding TabDodaOsobeVM.Adres}"/>
+                            <TextBox x:Name="adres" Text="{Binding TabDodaOsobeVM.Adres}"
+                                     MaxLength="50"/>
                             <TextBlock Text="Numer telefonu:"/>
-                            <TextBox x:Name="nrTel" Text="{Binding TabDodaOsobeVM.NrTel}"/>
+                            <TextBox x:Name="nrTel" Text="{Binding TabDodaOsobeVM.NrTel}"
+                                     MaxLength="12"/>
                             <TextBlock />
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -381,8 +387,15 @@
                             <TextBox x:Name="co" MaxLength="20" Text="{Binding TabDodajZamowienieVM.Co}"
                                      IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"/>
                             <TextBlock Text="Koszt:"/>
-                            <xctk:DoubleUpDown DefaultValue="0" Value="{Binding TabDodajZamowienieVM.Koszt}" Increment="0.01" FormatString="F2" Minimum="0" Maximum="1000000" CultureInfo="en-US"
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="95*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                </Grid.ColumnDefinitions>
+                                <xctk:DoubleUpDown Grid.Column="0" DefaultValue="0" Value="{Binding TabDodajZamowienieVM.Koszt}" Increment="0.01" FormatString="F2" Minimum="0" Maximum="1000000" CultureInfo="en-US"
                                                IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"/>
+                                <TextBlock Grid.Column="1" Text="zł" HorizontalAlignment="Center"/>
+                            </Grid>
                             <TextBlock Text="Data zamówienia"/>
                             <DatePicker x:Name="data_zam" SelectedDate="{Binding TabDodajZamowienieVM.DataZam}" 
                                         IsEnabled="{Binding TabDodajZamowienieVM.DodawanieDostepne}"/>
