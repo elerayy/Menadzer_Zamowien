@@ -19,12 +19,12 @@ drop database if exists `baza_zamowienia`;
 create database `baza_zamowienia`;
 use `baza_zamowienia`;
 
-drop user admin@localhost;
+drop user if exists admin@localhost;
 create user 'admin'@'localhost' identified by 'admin123';
 grant all on baza_zamowienia.* to admin@localhost;
 flush privileges;
 
-drop user nie_admin@localhost;
+drop user if exists nie_admin@localhost;
 create user 'nie_admin'@'localhost' identified by 'niejestemadminem';
 grant select on baza_zamowienia.* to nie_admin@localhost;
 flush privileges;
