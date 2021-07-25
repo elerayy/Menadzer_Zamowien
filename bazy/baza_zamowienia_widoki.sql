@@ -15,6 +15,15 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+drop database if exists `baza_zamowienia`;
+create database `baza_zamowienia`;
+use `baza_zamowienia`;
+
+drop user admin@localhost;
+create user 'admin'@'localhost' identified by 'admin123';
+grant all on baza_zamowienia.* to admin@localhost;
+flush privileges;
+
 --
 -- Temporary view structure for view `lista_przewoznika`
 --

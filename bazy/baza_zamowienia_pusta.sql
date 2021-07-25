@@ -19,6 +19,11 @@ drop database if exists `baza_zamowienia`;
 create database `baza_zamowienia`;
 use `baza_zamowienia`;
 
+drop user admin@localhost;
+create user 'admin'@'localhost' identified by 'admin123';
+grant all on baza_zamowienia.* to admin@localhost;
+flush privileges;
+
 --
 -- Table structure for table `osoby`
 --
